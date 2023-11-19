@@ -2,36 +2,32 @@
 # good for debugging and playing on macbooks and such
 
 out_dir = 'out-shakespeare-char'
-eval_interval = 250 # keep frequent because we'll overfit
-eval_iters = 200
-log_interval = 10 # don't print too too often
+eval_interval = 25 # Keep evaluations frequent due to expected overfitting
+eval_iters = 20
+log_interval = 10 # Moderate logging frequency
 
-# we expect to overfit on this small dataset, so only save when val improves
-always_save_checkpoint = False
+# Saving checkpoints only when validation improves
+always_save_checkpoint = True
 
-wandb_log = False # override via command line if you like
-wandb_project = 'shakespeare-char'
-wandb_run_name = 'mini-gpt'
-
-dataset = 'shakespeare_char'
+# Dataset and training batch configuration
+dataset = 'data_processed'
 gradient_accumulation_steps = 1
 batch_size = 64
-block_size = 256 # context of up to 256 previous characters
+block_size = 256 # Context window of up to 256 characters
 
-# baby GPT model :)
+# Configuration for a small GPT model
 n_layer = 6
 n_head = 6
 n_embd = 384
 dropout = 0.2
 
-learning_rate = 1e-3 # with baby networks can afford to go a bit higher
-max_iters = 5000
-lr_decay_iters = 5000 # make equal to max_iters usually
-min_lr = 1e-4 # learning_rate / 10 usually
-beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
+# Adjusted learning rate and iteration settings for quicker testing
+learning_rate = 1e-3
+max_iters = 500 # Reduced to 500 for faster testing
+lr_decay_iters = 500 # Adjusted to match the new max_iters
+min_lr = 1e-4
+beta2 = 0.99
 
-warmup_iters = 100 # not super necessary potentially
-
+warmup_iters = 10
 # on macbook also add
-# device = 'cpu'  # run on cpu only
-# compile = False # do not torch compile the model
+

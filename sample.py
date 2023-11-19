@@ -56,7 +56,7 @@ if compile:
 # look for the meta pickle in case it is available in the dataset folder
 load_meta = False
 if init_from == 'resume' and 'config' in checkpoint and 'dataset' in checkpoint['config']: # older checkpoints might not have these...
-    meta_path = os.path.join('data', checkpoint['config']['dataset'], 'meta.pkl')
+    meta_path = './data/shakespeare_char/meta.pkl'
     load_meta = os.path.exists(meta_path)
 if load_meta:
     print(f"Loading meta from {meta_path}...")
